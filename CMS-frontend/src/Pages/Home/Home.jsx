@@ -1,31 +1,39 @@
-import { useEffect } from 'react'
-import Navbar from '../../components/Navbar/Navbar'
 import axios from "axios"
-const Home = () => {
+import Navbar from "../../components/Navbar/Navbar"
+import { useEffect,useState } from "react"
 
-  //Call API
-  const fetchBlogs = async () => {
-    const response = await axios.get('http://localhost:2000/blogs')
-    console.log(response)
+
+const Home = () => {
+  const [blogs,setBlogs] = useState([])
+  // api call here 
+
+  const fetchBlogs = async ()=>{
+   const response =  await axios.get('http://localhost:2000/blogs')
+   setBlogs(response.data.blogs)
   }
-  useEffect(() => {
+  useEffect(()=>{
     fetchBlogs()
-  }, [])
+  },[])
+
+  
   return (
-    <>
+    <div>
       <Navbar />
-      <div className="card" style={{ width: '18rem' }}>
-        <div className='card-body'>
-          <h5 className="card-title">Card title</h5>
-          <h5 className="card-subtitle">Card Subtitle</h5>
-          <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, cumque commodi numquam laudantium fugiat, laboriosam corrupti ex perspiciatis veniam, explicabo dolorum corporis asperiores esse.</p>
-          <a href="#" className="btn btn-primary">Go somewhere</a>
-        </div>
+      <div className="card" style={{width: '18rem'}}>
+    {blogs.map((blog)=>{ //loop type
+      return(
+        <div key={blog._id} className="card-body">
+        <h5 className="card-title">{blog.title}</h5>
+        <h5 className="card-title">{blog.subTitle}</h5>
+        <p className="card-text">{blog.description}</p>
+        <a href="#" className="btn btn-primary">Go somewhere</a>
       </div>
-    </>
+      )
+    }) }
+ 
+</div>
+    </div>
   )
 }
-
-
 
 export default Home

@@ -2,6 +2,11 @@ const { connectDatabase } = require("./database/database");
 const Blog = require("./model/blog");
 const express = require("express")
 const app = express();
+const cors = require("cors")
+
+app.use(cors({
+    origin: "http://localhost:5173"
+}))
 
 //nodejs lai form bat arko data parse gara vaneko
 app.use(express.json());
@@ -30,9 +35,9 @@ app.get("/blogs", async (req, res) => {
         })
     } else {
         res.json({
-            status: 200,
+            // status: 200,
             message: "Blogs feteched",
-            data: blogs
+            blogs: blogs
         })
     }
 })

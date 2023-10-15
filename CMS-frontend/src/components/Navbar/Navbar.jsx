@@ -1,15 +1,14 @@
 import React from 'react'
 import"./navbar.css"
+import { useNavigate } from 'react-router-dom'
+import CreateBlog from '../../Pages/CreateBlog/CreateBlog'
 const Navbar = () => {
+  const navigate = useNavigate()
   return (
     <div className='navbar'>
       <a href='#'>Home</a>
-      <a href='#'>About</a>
-      <a href='#'>Services</a>
-      <a href='#'>Portfolio</a>
-      <a href='#'>Contact</a>
       <div className='navbar-right'>
-      <a href='#'>Sign In</a>
+      <a onClick={()=> navigate("./createBlog")}>CreateBlog</a>
       </div>
     </div>
   )
