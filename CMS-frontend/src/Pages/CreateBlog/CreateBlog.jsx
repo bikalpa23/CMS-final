@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom'
 
 const CreateBlog = () => {
     const navigate = useNavigate()
-    const [data, setData] = useState({
+    const [data, setData] = useState({   //just name
+        subTitle: "",   
         title: "",
-        subTitle: "",
         description: ""
     })
 
